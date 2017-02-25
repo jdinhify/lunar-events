@@ -1,0 +1,20 @@
+exports[`Counter component renders correctly 1`] = `
+<div>
+  <h1
+    className="counter-heading">
+    Counter
+  </h1>
+  <span
+    className="counter-span">
+    0
+  </span>
+  <button
+    onClick={[Function]}>
+    -
+  </button>
+  <button
+    onClick={[Function]}>
+    +
+  </button>
+</div>
+`;
