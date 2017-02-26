@@ -14,17 +14,24 @@
     "redux-mock-store": "^1.2.2"
   },
   "dependencies": {
+    "apollo-client": "^0.9.0",
+    "graphql-tag": "^1.2.4",
     "immutable": "^3.8.1",
+    "ramda": "^0.23.0",
     "react": "^15.4.2",
+    "react-apollo": "^0.12.0",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "redux-actions": "^1.2.1",
     "redux-logger": "^2.8.1",
-    "redux-thunk": "^2.2.0"
+    "reselect": "^2.5.4"
   },
   "eslintConfig": {
-    "extends": ["standard", "standard-react"],
+    "extends": [
+      "standard",
+      "standard-react"
+    ],
     "env": {
       "jest": true
     }

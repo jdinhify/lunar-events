@@ -1,0 +1,1 @@
+export const EVENT_YEAR_UPDATE = 'EVENT_YEAR_UPDATE'

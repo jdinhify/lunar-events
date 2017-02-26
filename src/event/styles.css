@@ -1,0 +1,35 @@
+.row {
+  display: block;
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 1rem;
+  padding: 1rem;
+  width: 100%;
+}
+.row .col-1-6 {
+  flex-basis: 16.666%;
+}
+.row .col-2-6 {
+  flex-basis: 33.333%;
+}
+.row .col-3-6 {
+  flex-basis: 50%;
+}
+.row .col-4-6 {
+  flex-basis: 66.666%;
+}
+.row .col-5-6 {
+  flex-basis: 83.333%;
+}
+
+.text-align-left {
+  text-align: left;
+}
+.text-align-right {
+  text-align: right;
+}
+.text-align-center {
+  text-align: center;
+}
