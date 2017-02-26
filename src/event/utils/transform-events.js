@@ -24,7 +24,6 @@ const convertDateInEvent = ({year = new Date().getFullYear(), timezone = 7.0}) =
   return {
     ...event,
     description,
-    lunarDate: `${lunarDay}/${lunarMonth}`,
     solarDate,
     month: `${solarMonth}`,
     weekDay

@@ -4,13 +4,15 @@ import EventEntry from './event-entry'
 
 const propTypes = {
   events: PropTypes.array.isRequired,
-  month: PropTypes.string.isRequired
+  month: PropTypes.string.isRequired,
+  updateEvent: PropTypes.func,
+  refetch: PropTypes.func
 }
-const Month = ({month, events}) =>
+const Month = ({month, events, updateEvent, refetch}) =>
   <div>
-    <h2>Tháng {month}</h2>
+    <div className='row'><h2>Tháng {month}</h2></div>
     {
-      events.map(event => <EventEntry key={event.id} event={event} />)
+      events.map(event => <EventEntry key={event.id} event={event} updateEvent={updateEvent} refetch={refetch} />)
     }
   </div>
 

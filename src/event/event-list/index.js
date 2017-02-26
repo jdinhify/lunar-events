@@ -5,14 +5,16 @@ import Month from './month'
 
 const propTypes = {
   allEvents: PropTypes.array.isRequired,
-  year: PropTypes.number
+  year: PropTypes.number,
+  updateEvent: PropTypes.func,
+  refetch: PropTypes.func
 }
 const defaultProps = {
   allEvents: [],
   year: new Date().getFullYear()
 }
 
-const EventList = ({allEvents, year}) => {
+const EventList = ({allEvents, year, updateEvent, refetch}) => {
   const events = transformEvents({year})({allEvents})
 
   return (
@@ -22,7 +24,7 @@ const EventList = ({allEvents, year}) => {
         {
           Object
             .keys(events)
-            .map((month, index) => <Month key={index} month={month} events={events[month]} />)
+            .map((month, index) => <Month key={index} month={month} events={events[month]} updateEvent={updateEvent} refetch={refetch} />)
         }
       </div>
     </div>

@@ -17,10 +17,8 @@ const propTypes = {
   updateYear: PropTypes.func,
   year: PropTypes.number,
   addEvent: PropTypes.func,
-  refetch: PropTypes.func
-}
-const defaultProps = {
-  data: {}
+  refetch: PropTypes.func,
+  updateEvent: PropTypes.func
 }
 
 const onYearChange = changeFunction => e => changeFunction(parseInt(e.target.value, 10))
@@ -35,11 +33,10 @@ const Event = props =>
       <option value='2019'>2019</option>
       <option value='2020'>2020</option>
     </select>
-    <EventList allEvents={props.allEvents} year={props.year} />
+    <EventList allEvents={props.allEvents} year={props.year} updateEvent={props.updateEvent} refetch={props.refetch} />
   </div>
 
 Event.propTypes = propTypes
-Event.defaultProps = defaultProps
 
 const mapStateToProps = state => ({
   year: eventYearSelector(state)
@@ -70,8 +67,20 @@ const addEventMutation = gql`
   }
 `
 
+const updateEventMutation = gql`
+  mutation updateEvent($id: ID!, $description: String!, $lunarDay: Int!, $lunarMonth: Int!) {
+    updateEvent(
+      id: $id,
+      description: $description,
+      lunarDay: $lunarDay,
+      lunarMonth: $lunarMonth
+    ) { id }
+  }
+`
+
 const EventLinked = compose(
   graphql(addEventMutation, {name: 'addEvent'}),
+  graphql(updateEventMutation, {name: 'updateEvent'}),
   graphql(allEventsQuery, ({
     props: ({data: { allEvents, refetch }}) => ({ allEvents, refetch })
   })),
