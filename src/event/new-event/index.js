@@ -6,7 +6,7 @@ import {
   clearEventDetail
 } from './redux'
 
-const onChange = ({name, func, isNumber}) => e => func({name, value: isNumber ? parseInt(e.target.value, 10) : e.target.value})
+const onChange = ({name, func, isNumber}) => e => func({name, value: e.target.value})
 
 const doAddEvent = ({newEvent: {description, lunarDay, lunarMonth}, addEvent, refetch, clearEventDetail}) => e => {
   e.preventDefault()
@@ -38,7 +38,7 @@ const NewEvent = ({updateEventDetail, newEvent, addEvent, refetch, clearEventDet
       placeholder='Ngày'
       min='1'
       max='31'
-      onChange={onChange({name: 'lunarDay', func: updateEventDetail, isNumber: true})}
+      onChange={onChange({name: 'lunarDay', func: updateEventDetail})}
       required
       value={newEvent.lunarDay} />
     <input
@@ -46,7 +46,7 @@ const NewEvent = ({updateEventDetail, newEvent, addEvent, refetch, clearEventDet
       placeholder='Tháng'
       min='1'
       max='12'
-      onChange={onChange({name: 'lunarMonth', func: updateEventDetail, isNumber: true})}
+      onChange={onChange({name: 'lunarMonth', func: updateEventDetail})}
       required
       value={newEvent.lunarMonth} />
     <input type='submit' />
