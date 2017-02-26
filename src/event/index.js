@@ -4,6 +4,7 @@ import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 
 import EventList from './event-list'
+import NewEvent from './new-event'
 import {
   eventYearSelector,
   updateYear
@@ -14,13 +15,19 @@ import './styles.css'
 const propTypes = {
   allEvents: PropTypes.any,
   updateYear: PropTypes.func,
-  year: PropTypes.number
+  year: PropTypes.number,
+  addEvent: PropTypes.func,
+  refetch: PropTypes.func
+}
+const defaultProps = {
+  data: {}
 }
 
 const onYearChange = changeFunction => e => changeFunction(parseInt(e.target.value, 10))
 
 const Event = props =>
   <div>
+    <NewEvent addEvent={props.addEvent} refetch={props.refetch} />
     <select value={props.year} onChange={onYearChange(props.updateYear)}>
       <option value='2016'>2016</option>
       <option value='2017'>2017</option>
@@ -32,6 +39,7 @@ const Event = props =>
   </div>
 
 Event.propTypes = propTypes
+Event.defaultProps = defaultProps
 
 const mapStateToProps = state => ({
   year: eventYearSelector(state)
@@ -52,9 +60,20 @@ const allEventsQuery = gql`
   }
 `
 
+const addEventMutation = gql`
+  mutation addEvent($description: String!, $lunarDay: Int!, $lunarMonth: Int!) {
+    createEvent(
+      description: $description,
+      lunarDay: $lunarDay,
+      lunarMonth: $lunarMonth
+    ) { id }
+  }
+`
+
 const EventLinked = compose(
+  graphql(addEventMutation, {name: 'addEvent'}),
   graphql(allEventsQuery, ({
-    props: ({data: { allEvents }}) => ({ allEvents })
+    props: ({data: { allEvents, refetch }}) => ({ allEvents, refetch })
   })),
   connect(mapStateToProps, mapDispachToProps)
 )(Event)
