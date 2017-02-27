@@ -27,29 +27,34 @@ const propTypes = {
 }
 
 const NewEvent = ({updateEventDetail, newEvent, addEvent, refetch, clearEventDetail}) =>
-  <form onSubmit={doAddEvent({newEvent, addEvent, refetch, clearEventDetail})}>
-    <textarea
-      placeholder='Nội Dung'
-      onChange={onChange({name: 'description', func: updateEventDetail})}
-      required
-      value={newEvent.description} />
-    <input
-      type='number'
-      placeholder='Ngày'
-      min='1'
-      max='31'
-      onChange={onChange({name: 'lunarDay', func: updateEventDetail})}
-      required
-      value={newEvent.lunarDay} />
-    <input
-      type='number'
-      placeholder='Tháng'
-      min='1'
-      max='12'
-      onChange={onChange({name: 'lunarMonth', func: updateEventDetail})}
-      required
-      value={newEvent.lunarMonth} />
-    <input type='submit' />
+  <form className='noprint row' onSubmit={doAddEvent({newEvent, addEvent, refetch, clearEventDetail})}>
+    <div className='col-4-6'>
+      <textarea
+        rows='3'
+        placeholder='Nội Dung'
+        onChange={onChange({name: 'description', func: updateEventDetail})}
+        required
+        value={newEvent.description} />
+    </div>
+    <div className='col-1-6 text-align-center'>
+      <input
+        type='number'
+        placeholder='Ngày'
+        min='1'
+        max='31'
+        onChange={onChange({name: 'lunarDay', func: updateEventDetail})}
+        required
+        value={newEvent.lunarDay} />
+      <input
+        type='number'
+        placeholder='Tháng'
+        min='1'
+        max='12'
+        onChange={onChange({name: 'lunarMonth', func: updateEventDetail})}
+        required
+        value={newEvent.lunarMonth} />
+    </div>
+    <div className='col-1-6 text-align-right'><button type='submit'>Thêm sự kiện</button></div>
   </form>
 
 NewEvent.propTypes = propTypes
