@@ -10,12 +10,15 @@ const onChange = ({name, func, isNumber}) => e => func({name, value: e.target.va
 
 const doAddEvent = ({newEvent: {description, lunarDay, lunarMonth}, addEvent, refetch, clearEventDetail}) => e => {
   e.preventDefault()
-  addEvent({variables: {
-    description,
-    lunarDay: parseInt(lunarDay, 10),
-    lunarMonth: parseInt(lunarMonth, 10)}})
-    .then(refetch())
+  addEvent({
+    variables: {
+      description,
+      lunarDay: parseInt(lunarDay, 10),
+      lunarMonth: parseInt(lunarMonth, 10)
+    }
+  })
     .then(clearEventDetail())
+    .then(refetch())
 }
 
 const propTypes = {

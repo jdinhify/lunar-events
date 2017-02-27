@@ -8,18 +8,19 @@ const propTypes = {
   year: PropTypes.number,
   updateEvent: PropTypes.func,
   refetch: PropTypes.func,
-  deleteEvent: PropTypes.func
+  deleteEvent: PropTypes.func,
+  loading: PropTypes.bool
 }
 const defaultProps = {
   allEvents: [],
   year: new Date().getFullYear()
 }
 
-const EventList = ({allEvents, year, updateEvent, refetch, deleteEvent}) => {
+const EventList = ({allEvents, year, updateEvent, refetch, deleteEvent, loading}) => {
   const events = transformEvents({year})({allEvents})
 
   return (
-    <div className='event-list'>
+    <div className={`event-list ${loading ? 'loading' : ''}`}>
       <h1>Các sự kiện quan trọng trong năm {year}</h1>
       <div>
         {

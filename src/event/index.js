@@ -5,6 +5,7 @@ import gql from 'graphql-tag'
 
 import EventList from './event-list'
 import NewEvent from './new-event'
+import UserLogin from './user-login'
 import {
   eventYearSelector,
   updateYear
@@ -19,15 +20,18 @@ const propTypes = {
   addEvent: PropTypes.func,
   refetch: PropTypes.func,
   updateEvent: PropTypes.func,
-  deleteEvent: PropTypes.func
+  deleteEvent: PropTypes.func,
+  user: PropTypes.object,
+  signinUser: PropTypes.func,
+  loading: PropTypes.bool
 }
 
 const onYearChange = changeFunction => e => changeFunction(parseInt(e.target.value, 10))
 
 const doPrint = () => window.print()
 
-const Event = props =>
-  <div>
+const Event = props => props.user
+  ? <div>
     <NewEvent addEvent={props.addEvent} refetch={props.refetch} />
     <div className='row noprint'>
       <div className='col-4-6'>
@@ -49,8 +53,10 @@ const Event = props =>
       year={props.year}
       updateEvent={props.updateEvent}
       refetch={props.refetch}
-      deleteEvent={props.deleteEvent} />
+      deleteEvent={props.deleteEvent}
+      loading={props.loading} />
   </div>
+  : <UserLogin signinUser={props.signinUser} refetch={props.refetch} loading={props.loading} />
 
 Event.propTypes = propTypes
 
@@ -101,13 +107,33 @@ const deleteEventMutation = gql`
     ) { id }
   }
 `
+const signinUser = gql`
+  mutation ($email: String!, $password: String!) {
+    signinUser(email: {email: $email, password: $password}) {
+      token
+    }
+  }
+`
+
+const userQuery = gql`
+  query user {
+    user {
+      id
+    }
+  }
+`
 
 const EventLinked = compose(
   graphql(addEventMutation, {name: 'addEvent'}),
   graphql(updateEventMutation, {name: 'updateEvent'}),
   graphql(deleteEventMutation, {name: 'deleteEvent'}),
+  graphql(signinUser, {name: 'signinUser'}),
+  graphql(userQuery, {
+    options: {forceFetch: true},
+    props: ({ownProps, data: {user, loading}}) => ({...ownProps, user, loading})
+  }),
   graphql(allEventsQuery, ({
-    props: ({data: { allEvents, refetch }}) => ({ allEvents, refetch })
+    props: ({data: { allEvents, refetch, loading }}) => ({ allEvents, refetch, loading })
   })),
   connect(mapStateToProps, mapDispachToProps)
 )(Event)
