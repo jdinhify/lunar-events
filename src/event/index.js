@@ -32,7 +32,7 @@ const doPrint = () => window.print()
 
 const Event = props => props.user
   ? <div>
-    <NewEvent addEvent={props.addEvent} refetch={props.refetch} />
+    <NewEvent addEvent={props.addEvent} refetch={props.refetch} user={props.user} />
     <div className='row noprint'>
       <div className='col-4-6'>
         <span>Năm hiển thị: &nbsp;&nbsp;</span>
@@ -69,8 +69,12 @@ const mapDispachToProps = dispatch => ({
 })
 
 const allEventsQuery = gql`
-  query allEvents {
-    allEvents {
+  query allEvents($email: String!)  {
+    allEvents (filter: {
+      users_some: {
+        email: $email
+      }
+    }) {
       id,
       description,
       lunarMonth,
@@ -80,11 +84,12 @@ const allEventsQuery = gql`
 `
 
 const addEventMutation = gql`
-  mutation addEvent($description: String!, $lunarDay: Int!, $lunarMonth: Int!) {
+  mutation addEvent($description: String!, $lunarDay: Int!, $lunarMonth: Int!, $userId: [ID!]) {
     createEvent(
       description: $description,
       lunarDay: $lunarDay,
-      lunarMonth: $lunarMonth
+      lunarMonth: $lunarMonth,
+      usersIds: $userId
     ) { id }
   }
 `
@@ -118,7 +123,8 @@ const signinUser = gql`
 const userQuery = gql`
   query user {
     user {
-      id
+      id,
+      email
     }
   }
 `
@@ -132,9 +138,11 @@ const EventLinked = compose(
     options: {forceFetch: true},
     props: ({ownProps, data: {user, loading}}) => ({...ownProps, user, loading})
   }),
-  graphql(allEventsQuery, ({
-    props: ({data: { allEvents, refetch, loading }}) => ({ allEvents, refetch, loading })
-  })),
+  graphql(allEventsQuery, {
+    options: ({ user: { email = '' } = {} }) => ({ variables: { email: email } }),
+    props: ({
+      data: { allEvents, refetch, loading }}) => ({ allEvents, refetch, loading })
+  }),
   connect(mapStateToProps, mapDispachToProps)
 )(Event)
 

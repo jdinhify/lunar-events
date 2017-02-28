@@ -40,8 +40,10 @@ class EventEntry extends Component {
         lunarMonth: parseInt(lunarMonth, 10)
       }
     })
-      .then(refetch())
-      .then(this.setState({editing: false}))
+      .then(() => {
+        refetch()
+        this.setState({editing: false})
+      })
   }
 
   toggleEdit = e => this.setState({editing: !this.state.editing})

@@ -8,17 +8,20 @@ import {
 
 const onChange = ({name, func, isNumber}) => e => func({name, value: e.target.value})
 
-const doAddEvent = ({newEvent: {description, lunarDay, lunarMonth}, addEvent, refetch, clearEventDetail}) => e => {
+const doAddEvent = ({newEvent: {description, lunarDay, lunarMonth}, addEvent, refetch, clearEventDetail, user: { id: userId }}) => e => {
   e.preventDefault()
   addEvent({
     variables: {
       description,
       lunarDay: parseInt(lunarDay, 10),
-      lunarMonth: parseInt(lunarMonth, 10)
+      lunarMonth: parseInt(lunarMonth, 10),
+      userId
     }
   })
-    .then(clearEventDetail())
-    .then(refetch())
+    .then(() => {
+      clearEventDetail()
+      refetch()
+    })
 }
 
 const propTypes = {
@@ -26,11 +29,12 @@ const propTypes = {
   newEvent: PropTypes.object,
   addEvent: PropTypes.func,
   refetch: PropTypes.func,
-  clearEventDetail: PropTypes.func
+  clearEventDetail: PropTypes.func,
+  user: PropTypes.object
 }
 
-const NewEvent = ({updateEventDetail, newEvent, addEvent, refetch, clearEventDetail}) =>
-  <form className='noprint row' onSubmit={doAddEvent({newEvent, addEvent, refetch, clearEventDetail})}>
+const NewEvent = ({updateEventDetail, newEvent, addEvent, refetch, clearEventDetail, user}) =>
+  <form className='noprint row' onSubmit={doAddEvent({newEvent, addEvent, refetch, clearEventDetail, user})}>
     <div className='col-4-6'>
       <textarea
         rows='3'
