@@ -59,7 +59,7 @@ class EventEntry extends Component {
         id
       }
     })
-      .then(refetch())
+      .then(() => refetch())
   }
 
   render () {
