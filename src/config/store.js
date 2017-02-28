@@ -12,7 +12,7 @@ if (isDevEnv) {
   middleware = [...middleware, logger]
 }
 
-const composeEnhancers = isDevEnv ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose : compose
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const storeConfig = preloadedState => createStore(
   reducers,
