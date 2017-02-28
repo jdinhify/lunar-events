@@ -21,7 +21,7 @@ const EventList = ({allEvents, year, updateEvent, refetch, deleteEvent, loading}
 
   return (
     <div className={`event-list ${loading ? 'loading' : ''}`}>
-      <h1>Các sự kiện quan trọng trong năm {year}</h1>
+      <div className='row'><h1>Các sự kiện quan trọng trong năm {year}</h1></div>
       <div>
         {
           Object

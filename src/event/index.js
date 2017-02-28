@@ -56,7 +56,9 @@ const Event = props => props.user
       deleteEvent={props.deleteEvent}
       loading={props.loading} />
   </div>
-  : <UserLogin signinUser={props.signinUser} refetch={props.refetch} loading={props.loading} />
+  : <UserLogin
+    signinUser={props.signinUser}
+    loading={props.loading} />
 
 Event.propTypes = propTypes
 
