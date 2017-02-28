@@ -45,7 +45,7 @@
     "build": "NODE_PATH=src react-scripts build && sw-precache --config=sw-precache-config.js",
     "build:clean": "rm -r build",
     "test": "NODE_PATH=src react-scripts test --env=jsdom",
-    "deploy": "npm run build:clean && npm run build && aws --profile jdinhlifeapps s3 sync build/ s3://apps-jdinh-life/apps/lunar-events/",
+    "deploy": "npm run build:clean && npm run build && aws --profile jdinhlifeapps s3 sync --delete build/ s3://apps-jdinh-life/apps/lunar-events/",
     "eject": "react-scripts eject"
   }
 }
