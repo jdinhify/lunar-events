@@ -76,6 +76,10 @@ button.delete {
   content: 'Loading...'
 }
 
+.error {
+  color: red;
+}
+
 @media print {
   .noprint {
     display: none!important;
