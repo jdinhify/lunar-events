@@ -1,5 +1,5 @@
 import { pipe, map, groupBy, prop, sort } from 'ramda'
-import { compareProps } from '@panosoft/ramda-utils'
+import { compareProps } from './ramda-utils'
 
 import { convertLunar2Solar } from './lunar'
 
