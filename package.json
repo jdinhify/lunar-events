@@ -38,14 +38,33 @@
     "env": {
       "browser": true,
       "jest": true
+    },
+    "rules": {
+      "indent": [
+        "error",
+        4,
+        {
+          "SwitchCase": 1
+        }
+      ],
+      "react/jsx-indent": [
+        "error",
+        4
+      ],
+      "react/jsx-indent-props": [
+        "error",
+        4
+      ]
     }
   },
   "scripts": {
     "start": "NODE_PATH=src react-scripts start",
     "build": "NODE_PATH=src react-scripts build && sw-precache --config=sw-precache-config.js",
-    "build:clean": "rm -r build",
+    "build:clean": "rimraf build",
     "test": "NODE_PATH=src react-scripts test --env=jsdom",
-    "deploy": "npm run build:clean && npm run build && aws --profile jdinhlifeapps s3 sync --delete build/ s3://apps-jdinh-life/apps/lunar-events/",
-    "eject": "react-scripts eject"
+    "lint:js": "eslint src",
+    "lint:js:fix": "eslint src --fix",
+    "eject": "react-scripts eject",
+    "deploy": "npm run build:clean && npm run build && aws --profile jdinhlifeapps s3 sync --delete build/ s3://apps-jdinh-life/apps/lunar-events/"
   }
 }

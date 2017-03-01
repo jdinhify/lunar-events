@@ -8,8 +8,8 @@ const isDevEnv = process.env.NODE_ENV === 'development'
 let middleware = [ apolloClient.middleware() ]
 
 if (isDevEnv) {
-  const logger = createLogger()
-  middleware = [...middleware, logger]
+    const logger = createLogger()
+    middleware = [...middleware, logger]
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

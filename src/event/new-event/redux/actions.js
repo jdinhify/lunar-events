@@ -5,9 +5,9 @@ import {
 } from './action-types'
 
 export const updateEventDetail = ({ name, value }) => ({
-  type: EVENT_DETAIL_UPDATE,
-  name,
-  value
+    type: EVENT_DETAIL_UPDATE,
+    name,
+    value
 })
 
 export const clearEventDetail = createAction(EVENT_DETAIL_CLEAR)

@@ -14,16 +14,16 @@ import {
 import './styles.css'
 
 const propTypes = {
-  allEvents: PropTypes.any,
-  updateYear: PropTypes.func,
-  year: PropTypes.number,
-  addEvent: PropTypes.func,
-  refetch: PropTypes.func,
-  updateEvent: PropTypes.func,
-  deleteEvent: PropTypes.func,
-  user: PropTypes.object,
-  signinUser: PropTypes.func,
-  loading: PropTypes.bool
+    allEvents: PropTypes.any,
+    updateYear: PropTypes.func,
+    year: PropTypes.number,
+    addEvent: PropTypes.func,
+    refetch: PropTypes.func,
+    updateEvent: PropTypes.func,
+    deleteEvent: PropTypes.func,
+    user: PropTypes.object,
+    signinUser: PropTypes.func,
+    loading: PropTypes.bool
 }
 
 const onYearChange = changeFunction => e => changeFunction(parseInt(e.target.value, 10))
@@ -32,42 +32,42 @@ const doPrint = () => window.print()
 
 const Event = props => props.user
   ? <div>
-    <NewEvent addEvent={props.addEvent} refetch={props.refetch} user={props.user} />
-    <div className='row noprint'>
-      <div className='col-4-6'>
-        <span>Năm hiển thị: &nbsp;&nbsp;</span>
-        <select value={props.year} onChange={onYearChange(props.updateYear)}>
-          <option value='2016'>2016</option>
-          <option value='2017'>2017</option>
-          <option value='2018'>2018</option>
-          <option value='2019'>2019</option>
-          <option value='2020'>2020</option>
-        </select>
+      <NewEvent addEvent={props.addEvent} refetch={props.refetch} user={props.user} />
+      <div className='row noprint'>
+          <div className='col-4-6'>
+              <span>Năm hiển thị: &nbsp;&nbsp;</span>
+              <select value={props.year} onChange={onYearChange(props.updateYear)}>
+                  <option value='2016'>2016</option>
+                  <option value='2017'>2017</option>
+                  <option value='2018'>2018</option>
+                  <option value='2019'>2019</option>
+                  <option value='2020'>2020</option>
+              </select>
+          </div>
+          <div className='col-2-6 text-align-right'>
+              <button onClick={doPrint}>In</button>
+          </div>
       </div>
-      <div className='col-2-6 text-align-right'>
-        <button onClick={doPrint}>In</button>
-      </div>
-    </div>
-    <EventList
-      allEvents={props.allEvents}
-      year={props.year}
-      updateEvent={props.updateEvent}
-      refetch={props.refetch}
-      deleteEvent={props.deleteEvent}
-      loading={props.loading} />
+      <EventList
+          allEvents={props.allEvents}
+          year={props.year}
+          updateEvent={props.updateEvent}
+          refetch={props.refetch}
+          deleteEvent={props.deleteEvent}
+          loading={props.loading} />
   </div>
   : <UserLogin
-    signinUser={props.signinUser}
-    loading={props.loading} />
+      signinUser={props.signinUser}
+      loading={props.loading} />
 
 Event.propTypes = propTypes
 
 const mapStateToProps = state => ({
-  year: eventYearSelector(state)
+    year: eventYearSelector(state)
 })
 
 const mapDispachToProps = dispatch => ({
-  updateYear: year => dispatch(updateYear(year))
+    updateYear: year => dispatch(updateYear(year))
 })
 
 const allEventsQuery = gql`
@@ -137,12 +137,12 @@ const EventLinked = compose(
   graphql(deleteEventMutation, {name: 'deleteEvent'}),
   graphql(signinUser, {name: 'signinUser'}),
   graphql(userQuery, {
-    options: {forceFetch: true},
-    props: ({ownProps, data: {user, loading}}) => ({...ownProps, user, loading})
+      options: {forceFetch: true},
+      props: ({ownProps, data: {user, loading}}) => ({...ownProps, user, loading})
   }),
   graphql(allEventsQuery, {
-    options: ({ user: { email = '' } = {} }) => ({ variables: { email: email } }),
-    props: ({
+      options: ({ user: { email = '' } = {} }) => ({ variables: { email: email } }),
+      props: ({
       data: { allEvents, refetch, loading }}) => ({ allEvents, refetch, loading })
   }),
   connect(mapStateToProps, mapDispachToProps)

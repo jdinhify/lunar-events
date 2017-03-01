@@ -8,14 +8,14 @@ import eventDetailUpdateReducer from './event-detail-update'
 import eventDetailClearReducer from './event-detail-clear'
 
 export const initialState = {
-  description: '',
-  lunarDay: '',
-  lunarMonth: ''
+    description: '',
+    lunarDay: '',
+    lunarMonth: ''
 }
 
 export const newEventReducer = handleActions({
-  [EVENT_DETAIL_UPDATE]: eventDetailUpdateReducer,
-  [EVENT_DETAIL_CLEAR]: eventDetailClearReducer(initialState)
+    [EVENT_DETAIL_UPDATE]: eventDetailUpdateReducer,
+    [EVENT_DETAIL_CLEAR]: eventDetailClearReducer(initialState)
 }, initialState)
 
 export default newEventReducer

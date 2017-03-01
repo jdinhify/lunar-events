@@ -11,8 +11,8 @@ import './index.css'
 const store = storeConfig()
 
 ReactDOM.render(
-  <ApolloProvider store={store} client={apolloClient}>
-    <App />
-  </ApolloProvider>,
+    <ApolloProvider store={store} client={apolloClient}>
+        <App />
+    </ApolloProvider>,
   document.getElementById('root')
 )
