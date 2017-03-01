@@ -31,7 +31,7 @@ const convertDateInEvent = ({year = new Date().getFullYear(), timezone = 7.0}) =
 }
 
 export const transformEvents = ({year = new Date().getFullYear(), timezone = 7.0}) => ({allEvents = []}) =>
-  pipe(
-    map(convertDateInEvent({year, timezone})),
-    groupBy(e => prop('month', e))
-  )(allEvents)
+    pipe(
+        map(convertDateInEvent({year, timezone})),
+        groupBy(e => prop('month', e))
+    )(allEvents)

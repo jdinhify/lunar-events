@@ -2,27 +2,9 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 import {
-  updateEventDetail,
-  clearEventDetail
+    updateEventDetail,
+    clearEventDetail
 } from './redux'
-
-const onChange = ({name, func, isNumber}) => e => func({name, value: e.target.value})
-
-const doAddEvent = ({newEvent: {description, lunarDay, lunarMonth}, addEvent, refetch, clearEventDetail, user: { id: userId }}) => e => {
-    e.preventDefault()
-    addEvent({
-        variables: {
-            description,
-            lunarDay: parseInt(lunarDay, 10),
-            lunarMonth: parseInt(lunarMonth, 10),
-            userId
-        }
-    })
-    .then(() => {
-        clearEventDetail()
-        refetch()
-    })
-}
 
 const propTypes = {
     updateEventDetail: PropTypes.func,
@@ -31,6 +13,25 @@ const propTypes = {
     refetch: PropTypes.func,
     clearEventDetail: PropTypes.func,
     user: PropTypes.object
+}
+
+const onChange = ({name, func, isNumber}) => e => func({name, value: e.target.value})
+
+const doAddEvent = ({newEvent: {description, lunarDay, lunarMonth}, addEvent, refetch, clearEventDetail, user: { id: userId }}) => e => {
+    e.preventDefault()
+
+    addEvent({
+        variables: {
+            description,
+            lunarDay: parseInt(lunarDay, 10),
+            lunarMonth: parseInt(lunarMonth, 10),
+            userId
+        }
+    })
+        .then(() => {
+            clearEventDetail()
+            refetch()
+        })
 }
 
 const NewEvent = ({updateEventDetail, newEvent, addEvent, refetch, clearEventDetail, user}) =>

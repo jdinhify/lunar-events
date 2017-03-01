@@ -22,21 +22,19 @@ const EventList = ({allEvents, year, updateEvent, refetch, deleteEvent, loading}
     return (
         <div className={`event-list ${loading ? 'loading' : ''}`}>
             <div className='row'><h1>Các sự kiện quan trọng trong năm {year}</h1></div>
-            <div>
-                {
-          Object
-            .keys(events)
-            .map((month, index) =>
-                <Month
-                    key={index}
-                    month={month}
-                    events={events[month]}
-                    updateEvent={updateEvent}
-                    refetch={refetch}
-                    deleteEvent={deleteEvent} />
-            )
-        }
-            </div>
+            <div>{
+                Object
+                    .keys(events)
+                    .map((month, index) =>
+                        <Month
+                            key={index}
+                            month={month}
+                            events={events[month]}
+                            updateEvent={updateEvent}
+                            refetch={refetch}
+                            deleteEvent={deleteEvent} />
+                    )
+            }</div>
         </div>
     )
 }

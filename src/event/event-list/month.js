@@ -13,14 +13,14 @@ const Month = ({month, events, updateEvent, refetch, deleteEvent}) =>
     <div className='month'>
         <div className='row'><h2>Tháng {month}</h2></div>
         {
-      events.map(event =>
-          <EventEntry
-              key={event.id}
-              event={event}
-              updateEvent={updateEvent}
-              refetch={refetch}
-              deleteEvent={deleteEvent} />)
-    }
+            events.map(event =>
+                <EventEntry
+                    key={event.id}
+                    event={event}
+                    updateEvent={updateEvent}
+                    refetch={refetch}
+                    deleteEvent={deleteEvent} />)
+        }
     </div>
 
 Month.propTypes = propTypes

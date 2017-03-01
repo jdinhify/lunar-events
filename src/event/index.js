@@ -7,8 +7,8 @@ import EventList from './event-list'
 import NewEvent from './new-event'
 import UserLogin from './user-login'
 import {
-  eventYearSelector,
-  updateYear
+    eventYearSelector,
+    updateYear
 } from './redux'
 
 import './styles.css'
@@ -31,34 +31,34 @@ const onYearChange = changeFunction => e => changeFunction(parseInt(e.target.val
 const doPrint = () => window.print()
 
 const Event = props => props.user
-  ? <div>
-      <NewEvent addEvent={props.addEvent} refetch={props.refetch} user={props.user} />
-      <div className='row noprint'>
-          <div className='col-4-6'>
-              <span>Năm hiển thị: &nbsp;&nbsp;</span>
-              <select value={props.year} onChange={onYearChange(props.updateYear)}>
-                  <option value='2016'>2016</option>
-                  <option value='2017'>2017</option>
-                  <option value='2018'>2018</option>
-                  <option value='2019'>2019</option>
-                  <option value='2020'>2020</option>
-              </select>
-          </div>
-          <div className='col-2-6 text-align-right'>
-              <button onClick={doPrint}>In</button>
-          </div>
-      </div>
-      <EventList
-          allEvents={props.allEvents}
-          year={props.year}
-          updateEvent={props.updateEvent}
-          refetch={props.refetch}
-          deleteEvent={props.deleteEvent}
-          loading={props.loading} />
-  </div>
-  : <UserLogin
-      signinUser={props.signinUser}
-      loading={props.loading} />
+    ? <div>
+        <NewEvent addEvent={props.addEvent} refetch={props.refetch} user={props.user} />
+        <div className='row noprint'>
+            <div className='col-4-6'>
+                <span>Năm hiển thị: &nbsp;&nbsp;</span>
+                <select value={props.year} onChange={onYearChange(props.updateYear)}>
+                    <option value='2016'>2016</option>
+                    <option value='2017'>2017</option>
+                    <option value='2018'>2018</option>
+                    <option value='2019'>2019</option>
+                    <option value='2020'>2020</option>
+                </select>
+            </div>
+            <div className='col-2-6 text-align-right'>
+                <button onClick={doPrint}>In</button>
+            </div>
+        </div>
+        <EventList
+            allEvents={props.allEvents}
+            year={props.year}
+            updateEvent={props.updateEvent}
+            refetch={props.refetch}
+            deleteEvent={props.deleteEvent}
+            loading={props.loading} />
+    </div>
+    : <UserLogin
+        signinUser={props.signinUser}
+        loading={props.loading} />
 
 Event.propTypes = propTypes
 
@@ -73,14 +73,14 @@ const mapDispachToProps = dispatch => ({
 const allEventsQuery = gql`
   query allEvents($email: String!)  {
     allEvents (filter: {
-      users_some: {
-        email: $email
-      }
+        users_some: {
+            email: $email
+        }
     }) {
-      id,
-      description,
-      lunarMonth,
-      lunarDay
+        id,
+        description,
+        lunarMonth,
+        lunarDay
     }
   }
 `
@@ -88,10 +88,10 @@ const allEventsQuery = gql`
 const addEventMutation = gql`
   mutation addEvent($description: String!, $lunarDay: Int!, $lunarMonth: Int!, $userId: [ID!]) {
     createEvent(
-      description: $description,
-      lunarDay: $lunarDay,
-      lunarMonth: $lunarMonth,
-      usersIds: $userId
+        description: $description,
+        lunarDay: $lunarDay,
+        lunarMonth: $lunarMonth,
+        usersIds: $userId
     ) { id }
   }
 `
@@ -99,10 +99,10 @@ const addEventMutation = gql`
 const updateEventMutation = gql`
   mutation updateEvent($id: ID!, $description: String!, $lunarDay: Int!, $lunarMonth: Int!) {
     updateEvent(
-      id: $id,
-      description: $description,
-      lunarDay: $lunarDay,
-      lunarMonth: $lunarMonth
+        id: $id,
+        description: $description,
+        lunarDay: $lunarDay,
+        lunarMonth: $lunarMonth
     ) { id }
   }
 `
@@ -110,14 +110,14 @@ const updateEventMutation = gql`
 const deleteEventMutation = gql`
   mutation deleteEvent($id: ID!) {
     deleteEvent(
-      id: $id
+        id: $id
     ) { id }
   }
 `
 const signinUser = gql`
   mutation ($email: String!, $password: String!) {
     signinUser(email: {email: $email, password: $password}) {
-      token
+        token
     }
   }
 `
@@ -125,8 +125,8 @@ const signinUser = gql`
 const userQuery = gql`
   query user {
     user {
-      id,
-      email
+        id,
+        email
     }
   }
 `

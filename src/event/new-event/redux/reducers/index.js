@@ -1,8 +1,8 @@
 import { handleActions } from 'redux-actions'
 
 import {
-  EVENT_DETAIL_UPDATE,
-  EVENT_DETAIL_CLEAR
+    EVENT_DETAIL_UPDATE,
+    EVENT_DETAIL_CLEAR
 } from '..'
 import eventDetailUpdateReducer from './event-detail-update'
 import eventDetailClearReducer from './event-detail-clear'

@@ -15,12 +15,12 @@ class UserLogin extends Component {
         }
     }
 
-    handleInputChange = name => e =>
-    this.setState({[name]: e.target.value, error: false})
+    handleInputChange = name => e => this.setState({[name]: e.target.value, error: false})
 
     handleSubmit = e => {
         const { signinUser } = this.props
         const { id, password } = this.state
+
         e.preventDefault()
         signinUser({
             variables: {
@@ -28,21 +28,21 @@ class UserLogin extends Component {
                 password
             }
         })
-      .then((response) => {
-          window.localStorage.setItem('graphcoolToken', response.data.signinUser.token)
-      })
-      .then(() =>
-        window.location.reload()
-      )
-      .catch((e) => {
-          console.error(e)
-          this.setState({error: true})
-      })
+            .then((response) => {
+                window.localStorage.setItem('graphcoolToken', response.data.signinUser.token)
+            })
+            .then(() =>
+                window.location.reload()
+            )
+            .catch((e) => {
+                console.error(e)
+                this.setState({error: true})
+            })
     }
 
     render () {
         return (
-      this.props.loading
+        this.props.loading
         ? <span>Loading...</span>
         : <form onSubmit={this.handleSubmit}>
             <div className='row justify-center'>
@@ -60,9 +60,8 @@ class UserLogin extends Component {
                     onChange={this.handleInputChange('password')} />
             </div>
             {this.state.error
-          ? <div className='error row justify-center'><span>Error!</span></div>
-          : undefined
-          }
+            ? <div className='error row justify-center'><span>Error!</span></div>
+            : undefined}
             <div className='row justify-center'>
                 <button>Login</button>
             </div>
