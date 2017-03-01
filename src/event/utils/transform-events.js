@@ -1,4 +1,5 @@
-import { pipe, map, groupBy, prop } from 'ramda'
+import { pipe, map, groupBy, prop, sort } from 'ramda'
+import { compareProps } from '@panosoft/ramda-utils'
 
 import { convertLunar2Solar } from './lunar'
 
@@ -26,12 +27,16 @@ const convertDateInEvent = ({year = new Date().getFullYear(), timezone = 7.0}) =
         description,
         solarDate,
         month: `${solarMonth}`,
-        weekDay
+        weekDay,
+        solarMonth,
+        solarDay,
+        solarYear
     }
 }
 
 export const transformEvents = ({year = new Date().getFullYear(), timezone = 7.0}) => ({allEvents = []}) =>
     pipe(
         map(convertDateInEvent({year, timezone})),
+        sort(compareProps(['-solarYear', '+solarMonth', '+solarDay'])),
         groupBy(e => prop('month', e))
     )(allEvents)
