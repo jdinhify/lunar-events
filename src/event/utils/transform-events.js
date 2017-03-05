@@ -15,10 +15,7 @@ const weekDays = {
 
 const convertDateInEvent = ({year = new Date().getFullYear(), timezone = 7.0}) => event => {
     const { description, lunarDay, lunarMonth } = event
-    const solarDateArr = convertLunar2Solar(lunarDay, lunarMonth, year, 0, timezone)
-    const solarDay = solarDateArr[0]
-    const solarMonth = solarDateArr[1]
-    const solarYear = solarDateArr[2]
+    const [ solarDay, solarMonth, solarYear ] = convertLunar2Solar(lunarDay, lunarMonth, year, 0, timezone)
     const solarDate = `${solarDay}/${solarMonth}/${solarYear}`
     const weekDay = weekDays[new Date(solarYear, solarMonth - 1, solarDay).getDay()]
 
@@ -26,17 +23,13 @@ const convertDateInEvent = ({year = new Date().getFullYear(), timezone = 7.0}) =
         ...event,
         description,
         solarDate,
-        month: `${solarMonth}`,
-        weekDay,
-        solarMonth,
-        solarDay,
-        solarYear
+        weekDay
     }
 }
 
 export const transformEvents = ({year = new Date().getFullYear(), timezone = 7.0}) => ({allEvents = []}) =>
     pipe(
         map(convertDateInEvent({year, timezone})),
-        sort(compareProps(['-solarYear', '+solarMonth', '+solarDay'])),
-        groupBy(e => prop('month', e))
+        sort(compareProps(['+lunarMonth', '+lunarDay'])),
+        groupBy(e => prop('lunarMonth', e))
     )(allEvents)
