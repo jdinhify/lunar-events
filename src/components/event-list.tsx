@@ -1,22 +1,32 @@
 import React, { useState } from 'react'
 import { transformEvents } from '../lib/transform-events'
-import { useQuery } from 'react-query'
+import { useQuery, queryCache, useMutation } from 'react-query'
 import { graphqlOperation, API } from 'aws-amplify'
 import { listEvents } from '../graphql/queries'
 import { ListEventsQuery } from '../graphql/types'
+import { deleteEvent } from '../graphql/mutations'
 
 const EventEntry = (props) => {
+  const {
+    event: { solarDate, weekDay, id },
+  } = props
+
+  const [deleteMutate, { isLoading: isDeleting }] = useMutation(
+    (): any => API.graphql(graphqlOperation(deleteEvent, { input: { id } })),
+    {
+      onSuccess: () => {
+        queryCache.invalidateQueries('all-events')
+      },
+    },
+  )
+
   const [event, setEvent] = useState({
     description: props.event.description,
     lunarDay: props.event.lunarDay,
     lunarMonth: props.event.lunarMonth,
   })
-  const [editing, setEditing] = useState(false)
-
   const { description, lunarDay, lunarMonth } = event
-  const {
-    event: { solarDate, weekDay, id },
-  } = props
+  const [editing, setEditing] = useState(false)
 
   const updateDetail = (type: string) => (e) =>
     setEvent({
@@ -34,7 +44,7 @@ const EventEntry = (props) => {
 
   const toggleEdit = () => setEditing(!editing)
 
-  const handleDelete = () => console.log(id)
+  const handleDelete = () => deleteMutate()
 
   return (
     <form className="row" onSubmit={handleSave}>
@@ -89,6 +99,7 @@ const EventEntry = (props) => {
               className="delete"
               type="button"
               onClick={handleDelete}
+              disabled={isDeleting}
             >
               Xoá
             </button>
