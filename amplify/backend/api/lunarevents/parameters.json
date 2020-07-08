@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "lunarevents",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authlunareventsa5ac985f",
+            "Outputs.UserPoolId"
+        ]
+    }
+}

@@ -1,0 +1,14 @@
+type Event
+  @model
+  @auth(rules: [
+    {allow: owner},
+    {allow: owner, ownerField: "collaborators", operations: [update, read]}
+  ])
+{
+  id: ID!
+  description: String!
+  lunarDay: String!
+  lunarMonth: String!
+  owner: String
+  collaborators: [String]
+}

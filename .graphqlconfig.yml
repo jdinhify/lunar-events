@@ -1,0 +1,15 @@
+projects:
+  lunarevents:
+    schemaPath: amplify/backend/api/lunarevents/build/schema.graphql
+    includes:
+      - src/graphql/**/*.ts
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: typescript
+        generatedFileName: src/graphql/types.ts
+        docsFilePath: src/graphql
+extensions:
+  amplify:
+    version: 3
