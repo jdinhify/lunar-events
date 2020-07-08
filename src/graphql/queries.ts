@@ -15,7 +15,7 @@ export const getEvent = /* GraphQL */ `
       updatedAt
     }
   }
-`
+`;
 export const listEvents = /* GraphQL */ `
   query ListEvents(
     $filter: ModelEventFilterInput
@@ -36,4 +36,4 @@ export const listEvents = /* GraphQL */ `
       nextToken
     }
   }
-`
+`;

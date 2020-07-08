@@ -1,6 +1,6 @@
 {
   "name": "lunar-events",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "next",
@@ -34,7 +34,8 @@
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.6",
+    "vercel": "^19.1.1"
   },
   "husky": {
     "hooks": {

@@ -18,7 +18,7 @@ export const createEvent = /* GraphQL */ `
       updatedAt
     }
   }
-`
+`;
 export const updateEvent = /* GraphQL */ `
   mutation UpdateEvent(
     $input: UpdateEventInput!
@@ -35,7 +35,7 @@ export const updateEvent = /* GraphQL */ `
       updatedAt
     }
   }
-`
+`;
 export const deleteEvent = /* GraphQL */ `
   mutation DeleteEvent(
     $input: DeleteEventInput!
@@ -52,4 +52,4 @@ export const deleteEvent = /* GraphQL */ `
       updatedAt
     }
   }
-`
+`;

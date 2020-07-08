@@ -143,7 +143,7 @@ export const EventList = ({ year }) => {
   const events = transformEvents({ year })(data?.data?.listEvents?.items)
 
   return status === 'loading' ? (
-    '...'
+    <span>...</span>
   ) : (
     <div className="event-list">
       <div className="event-list">

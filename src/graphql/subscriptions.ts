@@ -15,7 +15,7 @@ export const onCreateEvent = /* GraphQL */ `
       updatedAt
     }
   }
-`
+`;
 export const onUpdateEvent = /* GraphQL */ `
   subscription OnUpdateEvent($owner: String!, $collaborators: String!) {
     onUpdateEvent(owner: $owner, collaborators: $collaborators) {
@@ -29,7 +29,7 @@ export const onUpdateEvent = /* GraphQL */ `
       updatedAt
     }
   }
-`
+`;
 export const onDeleteEvent = /* GraphQL */ `
   subscription OnDeleteEvent($owner: String!, $collaborators: String!) {
     onDeleteEvent(owner: $owner, collaborators: $collaborators) {
@@ -43,4 +43,4 @@ export const onDeleteEvent = /* GraphQL */ `
       updatedAt
     }
   }
-`
+`;
