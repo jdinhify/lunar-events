@@ -3,20 +3,29 @@ import { transformEvents } from '../lib/transform-events'
 import { useQuery, queryCache, useMutation } from 'react-query'
 import { graphqlOperation, API } from 'aws-amplify'
 import { listEvents } from '../graphql/queries'
-import { ListEventsQuery } from '../graphql/types'
-import { deleteEvent } from '../graphql/mutations'
+import { ListEventsQuery, UpdateEventInput } from '../graphql/types'
+import { deleteEvent, updateEvent } from '../graphql/mutations'
 
 const EventEntry = (props) => {
   const {
     event: { solarDate, weekDay, id },
   } = props
+  const onMutateSuccess = () => {
+    queryCache.invalidateQueries('all-events')
+  }
 
   const [deleteMutate, { isLoading: isDeleting }] = useMutation(
     (): any => API.graphql(graphqlOperation(deleteEvent, { input: { id } })),
     {
-      onSuccess: () => {
-        queryCache.invalidateQueries('all-events')
-      },
+      onSuccess: onMutateSuccess,
+    },
+  )
+
+  const [updateMutate, { isLoading: isUpdating }] = useMutation(
+    (event: UpdateEventInput): any =>
+      API.graphql(graphqlOperation(updateEvent, { input: event })),
+    {
+      onSuccess: onMutateSuccess,
     },
   )
 
@@ -36,9 +45,7 @@ const EventEntry = (props) => {
 
   const handleSave = (e) => {
     e.preventDefault()
-    const { description, lunarDay, lunarMonth } = event
-
-    console.log('saving event', id, description, lunarDay, lunarMonth)
+    updateMutate({ ...event, id })
     setEditing(false)
   }
 
@@ -93,13 +100,15 @@ const EventEntry = (props) => {
       <div className="col-1-6 noprint">
         {editing ? (
           <div className="row justify-end">
-            <button type="submit">Lưu</button>
+            <button type="submit" disabled={isUpdating || isDeleting}>
+              Lưu
+            </button>
             <button
               style={{ marginLeft: '.5rem' }}
               className="delete"
               type="button"
               onClick={handleDelete}
-              disabled={isDeleting}
+              disabled={isDeleting || isUpdating}
             >
               Xoá
             </button>
