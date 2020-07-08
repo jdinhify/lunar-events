@@ -70,6 +70,7 @@ button {
   border: none;
   font-size: 1rem;
   padding: 0.5rem;
+  cursor: pointer;
 }
 button.padded-left {
   padding-left: 0.5rem;

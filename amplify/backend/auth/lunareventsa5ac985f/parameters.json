@@ -1,6 +1,4 @@
 {
-    "identityPoolName": "lunareventsa5ac985f_identitypool_a5ac985f",
-    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "lunarea5ac985f",
     "userPoolName": "lunareventsa5ac985f_userpool_a5ac985f",
     "autoVerifiedAttributes": [
@@ -14,8 +12,8 @@
     "smsVerificationMessage": "Your verification code is {####}",
     "emailVerificationSubject": "Your verification code",
     "emailVerificationMessage": "Your verification code is {####}",
-    "defaultPasswordPolicy": false,
-    "passwordPolicyMinLength": 8,
+    "defaultPasswordPolicy": true,
+    "passwordPolicyMinLength": "6",
     "passwordPolicyCharacters": [],
     "requiredAttributes": [],
     "userpoolClientGenerateSecret": true,
@@ -30,7 +28,7 @@
     "userpoolClientSetAttributes": false,
     "sharedId": "a5ac985f",
     "resourceName": "lunareventsa5ac985f",
-    "authSelections": "identityPoolAndUserPool",
+    "authSelections": "userPoolOnly",
     "authRoleArn": {
         "Fn::GetAtt": [
             "AuthRole",
@@ -43,12 +41,15 @@
             "Arn"
         ]
     },
-    "useDefault": "default",
+    "useDefault": "manual",
     "triggers": "{}",
     "userPoolGroupList": [],
     "parentStack": {
         "Ref": "AWS::StackId"
     },
     "permissions": [],
-    "dependsOn": []
+    "dependsOn": [],
+    "userPoolGroups": false,
+    "adminQueries": false,
+    "hostedUI": false
 }
