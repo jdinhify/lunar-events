@@ -23,8 +23,11 @@ const Home = () => {
             ))}
           </select>
         </div>
-        <div className="col-2-6 btn-print">
-          <button onClick={() => window.print()}>
+        <div className="col-2-6 flex justify-content-flex-end">
+          <button
+            className="flex align-items-center"
+            onClick={() => window.print()}
+          >
             <img
               className="icon-print"
               src="/icon-print.png"
@@ -36,12 +39,9 @@ const Home = () => {
       </div>
       <EventList year={year} />
       <style jsx>{`
-        .btn-print {
-          display: flex;
-          justify-content: flex-end;
-        }
         .icon-print {
-          height: 15px;
+          height: 16px;
+          padding-right: 0.5rem;
         }
       `}</style>
     </Auth>

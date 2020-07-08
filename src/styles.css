@@ -4,6 +4,32 @@ body {
   font-family: sans-serif;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+input,
+textarea {
+  font-size: 1rem;
+  width: 90%;
+}
+
+button {
+  background-color: aquamarine;
+  border: none;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+h1 {
+  margin: 0.5rem 0;
+}
+
+h2 {
+  margin: 0.5rem 0 0.375rem;
+}
+
 .row {
   display: block;
   display: flex;
@@ -12,6 +38,7 @@ body {
   min-width: 1rem;
   padding: 0.5rem 1rem;
   width: 100%;
+  align-items: center;
 }
 .row.justify-center {
   justify-content: center;
@@ -51,27 +78,30 @@ body {
   text-align: center;
 }
 
-input,
-textarea {
-  font-size: 1rem;
-  width: 90%;
+.flex {
+  display: flex;
 }
 
-* {
-  box-sizing: border-box;
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.justify-content-flex-end {
+  justify-content: flex-end;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.width-90 {
+  width: 90%;
 }
 
 .month > .row {
   border-bottom: 1px solid #ccc;
 }
 
-button {
-  background-color: aquamarine;
-  border: none;
-  font-size: 1rem;
-  padding: 0.5rem;
-  cursor: pointer;
-}
 button.padded-left {
   padding-left: 0.5rem;
 }

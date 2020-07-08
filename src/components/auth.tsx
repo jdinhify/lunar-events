@@ -21,7 +21,7 @@ export const Auth = ({ children }) => {
   return state.authState === AuthState.SignedIn ||
     state.authState === AuthState.VerifyContact ? (
     <>
-      <div className="sign-out-wrapper">
+      <div className="sign-out-wrapper noprint">
         <button onClick={() => AmplifyAuth.signOut()}>Đăng xuất</button>
       </div>
       {children}
