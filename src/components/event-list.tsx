@@ -1,20 +1,9 @@
 import React, { useState } from 'react'
 import { transformEvents } from '../lib/transform-events'
-
-const allEvents = [
-  {
-    description: 'Event 1',
-    lunarDay: '4',
-    lunarMonth: '1',
-    id: '1',
-  },
-  {
-    description: 'Event 2',
-    lunarDay: '5',
-    lunarMonth: '1',
-    id: '2',
-  },
-]
+import { useQuery } from 'react-query'
+import { graphqlOperation, API } from 'aws-amplify'
+import { listEvents } from '../graphql/queries'
+import { ListEventsQuery } from '../graphql/types'
 
 const EventEntry = (props) => {
   const [event, setEvent] = useState({
@@ -127,9 +116,15 @@ const Month = ({ month, events }) => (
 )
 
 export const EventList = ({ year }) => {
-  const events = transformEvents({ year })({ allEvents })
+  const { status, data } = useQuery<{ data: ListEventsQuery }, any>(
+    'all-events',
+    (): any => API.graphql(graphqlOperation(listEvents)),
+  )
+  const events = transformEvents({ year })(data?.data?.listEvents?.items)
 
-  return (
+  return status === 'loading' ? (
+    '...'
+  ) : (
     <div className="event-list">
       <div className="event-list">
         <div className="row">

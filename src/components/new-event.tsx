@@ -3,7 +3,7 @@ import '../integration/aws-config'
 import { API, graphqlOperation } from 'aws-amplify'
 import { createEvent } from '../graphql/mutations'
 import { CreateEventInput } from '../graphql/types'
-import { useMutation } from 'react-query'
+import { useMutation, queryCache } from 'react-query'
 
 const initialEvent = {
   description: '',
@@ -19,7 +19,12 @@ export const NewEvent = () => {
   const [mutate, { isLoading }] = useMutation(
     (event: CreateEventInput): any =>
       API.graphql(graphqlOperation(createEvent, { input: event })),
-    { onSuccess: () => newEventSet(initialEvent) },
+    {
+      onSuccess: () => {
+        newEventSet(initialEvent)
+        queryCache.invalidateQueries('all-events')
+      },
+    },
   )
 
   const handleUpdate = (key: string) => (e: { target: { value: any } }) =>

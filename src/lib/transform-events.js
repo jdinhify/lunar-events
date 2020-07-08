@@ -40,7 +40,7 @@ const convertDateInEvent = ({
 export const transformEvents = ({
   year = new Date().getFullYear(),
   timezone = 7.0,
-}) => ({ allEvents = [] }) =>
+}) => (allEvents = []) =>
   pipe(
     map(convertDateInEvent({ year, timezone })),
     sort(compareProps(['+lunarMonth', '+lunarDay'])),
