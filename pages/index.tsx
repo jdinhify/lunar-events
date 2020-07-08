@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { EventList } from '../src/components/event-list'
 import { NewEvent } from '../src/components/new-event'
-import { Auth } from '../src/components/auth'
+import { Protected } from '../src/components/auth'
 
 const Home = () => {
   const [year, setYear] = useState(String(new Date().getFullYear()))
@@ -10,7 +10,7 @@ const Home = () => {
     (number) => parseInt(year, 10) - 4 + number,
   )
   return (
-    <Auth>
+    <Protected>
       <NewEvent />
       <div className="row noprint">
         <div className="col-4-6">
@@ -44,7 +44,7 @@ const Home = () => {
           padding-right: 0.5rem;
         }
       `}</style>
-    </Auth>
+    </Protected>
   )
 }
 

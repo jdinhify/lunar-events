@@ -7,9 +7,9 @@ import {
 import { AuthState, AuthStateHandler } from '@aws-amplify/ui-components'
 import '../integration/aws-config'
 import { useRouter } from 'next/router'
-import { Auth as AmplifyAuth } from 'aws-amplify'
+import { Auth } from 'aws-amplify'
 
-export const Auth = ({ children }) => {
+export const Protected = ({ children }) => {
   const { query } = useRouter()
   const [state, setState] = useState<{ authState: AuthState }>({
     authState: AuthState.Loading,
@@ -22,7 +22,7 @@ export const Auth = ({ children }) => {
     state.authState === AuthState.VerifyContact ? (
     <>
       <div className="sign-out-wrapper noprint">
-        <button onClick={() => AmplifyAuth.signOut()}>Đăng xuất</button>
+        <button onClick={() => Auth.signOut()}>Đăng xuất</button>
       </div>
       {children}
 
