@@ -6,6 +6,8 @@ import { listEvents } from '../graphql/queries'
 import { ListEventsQuery, UpdateEventInput } from '../graphql/types'
 import { deleteEvent, updateEvent } from '../graphql/mutations'
 
+const padNumber = (number) => String(number).padStart(2, '0')
+
 const EventEntry = (props) => {
   const {
     event: { solarDate, weekDay, id },
@@ -93,7 +95,7 @@ const EventEntry = (props) => {
             </div>
           </div>
         ) : (
-          <span>{`${lunarDay}/${lunarMonth}`}</span>
+          <span>{`${padNumber(lunarDay)}/${padNumber(lunarMonth)}`}</span>
         )}
       </div>
       <div className="col-1-6 text-align-center">{solarDate}</div>
