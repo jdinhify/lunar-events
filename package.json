@@ -13,7 +13,7 @@
   "dependencies": {
     "@aws-amplify/ui-react": "^0.2.9",
     "aws-amplify": "^3.0.18",
-    "next": "9.4.4",
+    "next": "11.1.0",
     "ramda": "^0.27.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
